@@ -10,7 +10,9 @@ public class PlayerController : MonoBehaviour
     public TextMeshProUGUI countText;
     public GameObject winTextObject;
     public int totalPickups = 8;
+    public float jumpForce = 1;
 
+    private bool onFloor;
     private Rigidbody rb;
     private int count;
     private float movementX;
@@ -41,6 +43,14 @@ public class PlayerController : MonoBehaviour
         movementY = movementVector.y;
     }
 
+    void OnJump() {
+        Debug.Log("heyo");
+        if (onFloor) {
+            rb.AddForce(new Vector3(0, jumpForce, 0));
+            onFloor = false;
+        }
+    }
+
     void SetCountText()
     {
         countText.text = "Count: " + count;
@@ -54,7 +64,7 @@ public class PlayerController : MonoBehaviour
     void FixedUpdate()
     {
         Vector3 movement = new Vector3(movementX, 0.0f, movementY);
-        rb.AddForce(movement * speed);
+        rb.AddForce(movement * speed);        
     }
 
     private void OnTriggerEnter(Collider other)
@@ -69,6 +79,11 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    private void OnCollisionEnter(Collision collision) {
+        if (collision.gameObject.CompareTag("Floor")) {
+            onFloor = true;
+        }
+    }
     // Update is called once per frame
     void Update()
     {

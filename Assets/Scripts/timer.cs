@@ -2,19 +2,19 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class timer : MonoBehaviour
+public class Timer : MonoBehaviour
 {
-    public GameObject playerObject;
+    public int timeToLose;
 
     // Start is called before the first frame update
     void Start()
     {
-        playerObject.SendMessage("testMethod");
+        
     }
 
     // Update is called once per frame
     void Update()
     {
-        // New comment
+        
     }
 }
