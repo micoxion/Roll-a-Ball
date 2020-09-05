@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour
     public float speed = 0;
     public TextMeshProUGUI countText;
     public GameObject winTextObject;
+    public GameObject timer;
     public int totalPickups = 8;
     public float jumpForce = 1;
 
@@ -17,8 +18,6 @@ public class PlayerController : MonoBehaviour
     private int count;
     private float movementX;
     private float movementY;
-
-	// New comment
 
     public void testMethod()
     {
@@ -44,7 +43,6 @@ public class PlayerController : MonoBehaviour
     }
 
     void OnJump() {
-        Debug.Log("heyo");
         if (onFloor) {
             rb.AddForce(new Vector3(0, jumpForce, 0));
             onFloor = false;
@@ -57,6 +55,7 @@ public class PlayerController : MonoBehaviour
 
         if (count == totalPickups)
         {
+            timer.SendMessage("StopCountDown");
             winTextObject.SetActive(true);
         }
     }
@@ -84,9 +83,8 @@ public class PlayerController : MonoBehaviour
             onFloor = true;
         }
     }
-    // Update is called once per frame
-    void Update()
-    {
 
+    public int GetCount() {
+        return count;
     }
 }
