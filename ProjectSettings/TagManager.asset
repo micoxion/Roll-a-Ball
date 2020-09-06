@@ -6,6 +6,7 @@ TagManager:
   tags:
   - PickUp
   - Floor
+  - Kill Plain
   layers:
   - Default
   - TransparentFX

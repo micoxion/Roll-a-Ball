@@ -95,6 +95,8 @@ public class PlayerController : MonoBehaviour
             other.gameObject.SetActive(false);
             count += other.gameObject.GetComponent<PickUpData>().pointValue;
             SetCountText();
+        } else if (other.gameObject.CompareTag("Kill Plain")) {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
     }
 
