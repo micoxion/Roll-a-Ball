@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
@@ -47,6 +48,10 @@ public class PlayerController : MonoBehaviour
             rb.AddForce(new Vector3(0, jumpForce, 0));
             onFloor = false;
         }
+    }
+
+    void OnRestart() {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
     void SetCountText()
