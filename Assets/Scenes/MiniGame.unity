@@ -473,12 +473,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 81515851a693ab546a7c3fb29008ef5b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 10
   countText: {fileID: 1611825651}
   winTextObject: {fileID: 1042082797}
   timer: {fileID: 1392417592}
-  totalPickups: 8
+  restartButton: {fileID: 2102354678}
+  pickUpParent: {fileID: 307631591}
+  scoreOverride: 0
   jumpForce: 300
+  speed: 10
 --- !u!114 &101359760
 MonoBehaviour:
   m_ObjectHideFlags: 0

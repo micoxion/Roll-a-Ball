@@ -7,16 +7,20 @@ using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
-    public float speed = 0;
     public TextMeshProUGUI countText;
     public GameObject winTextObject;
     public GameObject timer;
-    public int totalPickups = 8;
+    public GameObject restartButton;
+    public GameObject pickUpParent;
+    //change this to 1 or more in the inspector to override the score needed to win
+    public int scoreOverride;
     public float jumpForce = 1;
+    public float speed = 0;
 
-    private bool onFloor;
     private Rigidbody rb;
+    private bool onFloor;
     private int count;
+    private int scoreToWin;
     private float movementX;
     private float movementY;
 
@@ -34,6 +38,16 @@ public class PlayerController : MonoBehaviour
         SetCountText();
 
         winTextObject.SetActive(false);
+
+        PickUpData[] pickUps = pickUpParent.GetComponentsInChildren<PickUpData>();
+
+        foreach (PickUpData data in pickUps) {
+            scoreToWin += data.pointValue;
+        }
+
+        if (scoreOverride > 0) {
+            scoreToWin = scoreOverride;
+        }
     }
 
     void OnMove(InputValue movementValue)
@@ -58,10 +72,11 @@ public class PlayerController : MonoBehaviour
     {
         countText.text = "Count: " + count;
 
-        if (count == totalPickups)
+        if (count == scoreToWin)
         {
             timer.SendMessage("StopCountDown");
             winTextObject.SetActive(true);
+            restartButton.SetActive(true);  
         }
     }
 
@@ -78,7 +93,7 @@ public class PlayerController : MonoBehaviour
         if (other.gameObject.CompareTag("PickUp"))
         {
             other.gameObject.SetActive(false);
-            count++;
+            count += other.gameObject.GetComponent<PickUpData>().pointValue;
             SetCountText();
         }
     }
