@@ -12,6 +12,7 @@ public class PlayerController : MonoBehaviour
     public GameObject timer;
     public GameObject restartButton;
     public GameObject pickUpParent;
+    public GameObject dustPuff;
     //change this to 1 or more in the inspector to override the score needed to win
     public int scoreOverride;
     public float jumpForce = 1;
@@ -102,6 +103,9 @@ public class PlayerController : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision) {
         if (collision.gameObject.CompareTag("Floor")) {
+            GameObject puff = Instantiate(dustPuff);
+            puff.transform.position = new Vector3(transform.position.x, transform.position.y - .5f, transform.position.z);
+            puff.GetComponent<ParticleSystem>().Play();
             onFloor = true;
         }
     }
